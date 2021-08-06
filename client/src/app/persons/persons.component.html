@@ -1,0 +1,131 @@
+<div class="mx-5 px-5 ">
+  <div class="container-fluid">
+    <div class="bg-white px-3 py-4 br-10 shadow wrapper">
+    <div class="row mb-3">
+        <div class="col-sm-12 col-md-3 ml-auto text-right">
+            <button type="button" class="btn btn-primary " (click)="openAddModal()">Add Person</button>
+        </div>
+    </div>
+
+
+    <section class="bg-light py-3 px-2 mb-3">
+
+      <div class="row mb-4">
+
+          <div class="col-sm-12 col-md-3">
+              <label for="searchByFirstName1" class="form-label"><strong>FirstnameGeo </strong></label>
+              <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByFirstNameGeo
+                  placeholder="Search By FirstNameGeo" id="searchByFirstName1">
+          </div>
+          <div class="col-sm-12 col-md-3">
+              <label for="searchByLastName1" class="form-label"><strong>LastNameGeo</strong></label>
+              <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByLastNameGeo
+                  placeholder="Search By LastNameGeo" id="searchByLastName1" />
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <label for="searchByFirstName2" class="form-label"><strong>FirstNameEn</strong></label>
+            <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByFirstNameEn
+                placeholder="Search By FirstNameEn" id="searchByFirstName2" />
+          </div>
+          <div class="col-sm-12 col-md-3">
+            <label for="searchByLastName2" class="form-label"><strong>LastNameEn</strong></label>
+            <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByLastNameEn
+                placeholder="Search By LastNameEn" id="searchByLastName2" />
+          </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12 col-md">
+          <label for="searchByPrivateNumber" class="form-label"><strong>PrivateNumber </strong></label>
+          <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByPrivateNumber
+              placeholder="Search By PrivateNumber" id="searchByPrivateNumber">
+        </div>
+        <div class="col-sm-12 col-md">
+          <label for="searchByBirthDate" class="form-label"><strong>BirthDate </strong></label>
+          <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByBirthDate
+              placeholder="Search By BirthDate" id="searchByBirthDate">
+        </div>
+        <div class="col-sm-12 col-md">
+          <label for="searchByAddress" class="form-label"><strong>Address </strong></label>
+          <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByAddress
+              placeholder="Search By Address" id="searchByAddress">
+        </div>
+        <div class="col-sm-12 col-md">
+          <label for="searchByPhone" class="form-label"><strong>Phone </strong></label>
+          <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByPhone
+              placeholder="Search By Phone" id="searchByPhone">
+        </div>
+        <div class="col-sm-12 col-md">
+          <label for="searchByEmail" class="form-label"><strong>Email </strong></label>
+          <input (keyup.enter)="onSearch()" type="text" class="form-control mr-2" #searchByEmail
+              placeholder="Search By Email" id="searchByEmail">
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-end pt-3">
+        <div class="">
+          <button type="reset" (click)="onReset()" class="btn btn-outline-success btn-sm mr-2 ">Reset</button>
+          <button (click)="onSearch()" class="btn btn-outline-primary btn-sm">Search</button>
+        </div>
+      </div>
+
+
+    </section>
+
+      <div class="row">
+        <div class="col ">
+          <table class="table table-hover bg-white">
+              <thead class="bg-light">
+                  <tr>
+                      <th>FirstNameGeo</th>
+                      <th>LastNameGeo</th>
+                      <th>FirstNameEn</th>
+                      <th>LastNameEn</th>
+                      <th>PrivateNumber</th>
+                      <th>Birthdate</th>
+                      <th>Address</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let person of persons"  >
+                    <td>{{person.firstNameGeo}}</td>
+                    <td>{{person.lastNameGeo}}</td>
+                    <td>{{person.firstNameEn}}</td>
+                    <td>{{person.lastNameEn}}</td>
+                    <td>{{person.privateNumber}}</td>
+                    <td>{{person.birthdate | date}}</td>
+                    <td>{{person.address}}</td>
+                    <td>{{person.phone}}</td>
+                    <td>{{person.email}}</td>
+                    <td class="d-flex">
+                      <button type="button"
+                        routerLink="/persons/{{person.id}}" class="btn btn-primary mr-1 fa fas fa-info-circle">
+                      </button>
+                      <button type="button"
+                          class="btn btn-warning mr-1 fa fas fa-edit" (click)="openEditModal(person)"></button>
+                      <button type="button"
+                          (click)="deletePerson(person.id)" class="btn btn-danger mr-1 fa fas fa-trash">
+                      </button>
+                    </td>
+                </tr>
+              </tbody>
+
+          </table>
+          <div class="d-flex justify-content-between align-items-center pt-3" *ngIf="pagination?.itemsPerPage > 0">
+
+              <app-pager-header [totalCount]="pagination?.totalItems" [pageSize]="pagination?.itemsPerPage"
+              [pageNumber]="pagination?.currentPage"></app-pager-header>
+
+              <app-pager [pageSize]="pagination?.itemsPerPage" [totalCount]="pagination?.totalItems" (pageChanged)="onPageChanged($event)">
+              </app-pager>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

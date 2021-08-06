@@ -1,0 +1,9 @@
+a{
+  text-decoration: none;
+  color: #343a40;
+
+  &.active{
+    font-weight: 600;
+    color: #ffc107;
+  }
+}

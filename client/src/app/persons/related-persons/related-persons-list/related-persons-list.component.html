@@ -1,0 +1,56 @@
+<div class="card shadow-sm" >
+  <h5 class="card-header  py-3">Related Persons</h5>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12">
+
+        <div class="card shadow-sm h-100 ">
+          <div class="card-body">
+            <form [formGroup]="itemform" (ngSubmit)="addRelatedPerson(itemform)">
+              <app-text-input formControlName="privateNumber" [label]="'PrivateNumber'"></app-text-input>
+              <div class="form-group">
+                <label for="relationshipData" class="form-label">Select Relationship</label>
+                <select  class="custom-select" (change)="onSRelationshipSelected($event.target.value)" id="relationshipData">
+                  <option value="">select ...</option>
+                  <option *ngFor="let rel of relationshipsOptions" [value]="rel.value">
+                    {{rel.relationship}}
+                  </option>
+                </select>
+              </div>
+              <button [disabled]="itemform.invalid" class="btn btn-primary float-right " type="submit">Add relationship</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+      <div class="col-12" >
+
+        <table class="table table-bordered" >
+          <thead>
+            <tr>
+              <th>PrivateNumber</th>
+              <th>FirstNameGeo</th>
+              <th>LastNameGeo</th>
+              <th>Relationship</th>
+              <th class="text-center">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let person of relatedPersons">
+              <td>{{person.privateNumber}}</td>
+              <td>{{person.firstNameGeo}}</td>
+              <td>{{person.lastNameGeo}}</td>
+              <td>{{person.relationship}}</td>
+              <td class="text-center">
+                <button class="btn btn-danger btn-sm fa fas fa-trash" (click)="deleteRelatedPerson(person.id)" type="button"></button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+ </div>

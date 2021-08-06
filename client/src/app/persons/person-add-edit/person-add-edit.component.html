@@ -1,0 +1,51 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left" id="my-modal-title">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="itemform" (ngSubmit)="addAndSavePerson(itemform)">
+      <div class="form-row">
+        <div class="col-md-6">
+          <app-text-input formControlName="firstNameGeo" [label]="'FirstnameGeo'"></app-text-input>
+        </div>
+        <div class="col-md-6">
+          <app-text-input formControlName="firstNameEn" [label]="'FirstNameEn'"></app-text-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <app-text-input formControlName="lastNameGeo" [label]="'LastNameGeo'"></app-text-input>
+        </div>
+        <div class="col-md-6">
+          <app-text-input formControlName="lastNameEn" [label]="'LastNameEn'"></app-text-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6">
+          <app-text-input formControlName="privateNumber" [label]="'PrivateNumber'"></app-text-input>
+        </div>
+        <div class="col-md-6">
+          <app-text-input type="date" formControlName="birthdate" [label]="'Birthdate'"></app-text-input>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-6">
+          <app-text-input formControlName="address" [label]="'Address'"></app-text-input>
+        </div>
+        <div class="col-md-6">
+          <app-text-input formControlName="phone" [label]="'Phone'"></app-text-input>
+        </div>
+      </div>
+      <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
+
+      <div class="d-flex justify-content-end align-items-center py-2">
+        <button type="button" class="btn btn-secondary mr-2" (click)="modalRef.hide()">{{closeBtnName}}</button>
+        <button [disabled]="itemform.invalid" type="button" class="btn btn-primary" type="submit" >{{btnTitle}}</button>
+      </div>
+    </form>
+
+  </div>
+
